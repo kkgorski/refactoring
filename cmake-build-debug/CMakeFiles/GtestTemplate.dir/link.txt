@@ -1,0 +1,1 @@
+/usr/bin/c++.exe -g  -Wl,--enable-auto-import CMakeFiles/GtestTemplate.dir/main.cpp.o CMakeFiles/GtestTemplate.dir/test/main_test.cpp.o  -o GtestTemplate.exe -Wl,--out-implib,libGtestTemplate.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
