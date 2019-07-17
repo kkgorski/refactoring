@@ -13,6 +13,7 @@ class Player
 public:
 
     Player(std::string _name, int _money, FieldIterator _field): name(_name), money(_money), field(_field){}
+
     const std::string getName() const
     {
       return name;
@@ -46,6 +47,10 @@ public:
         return field.getCurrent();
     }
 */
+    bool isBankrupt()
+    {
+      return money > 0;
+    }
 private:
     int rollDice()
     {

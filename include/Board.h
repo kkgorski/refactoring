@@ -8,9 +8,10 @@
 #include <iostream>
 #include <vector>
 #include <map>
-#include "Field.h"
 #include <memory>
+#include <algorithm>
 #include "math.h"
+#include "Field.h"
 #include "Player.h"
 
 class StartField;
@@ -48,10 +49,12 @@ public:
       for (auto& player: players)
       {
         std::cout << "before make move";
-        player.makeMove();
         std::cout<<player.getName() << " current position: "<< player.getPossition();
         std::cout<<" Current balance: "<<player.getMoney()<<std::endl;
       }
+      //players.erase(std::remove_if(players.begin(), players.end(), 
+      //      [](Player& player) {return player.isBankrupt();}), players.end());
+      //TODO implement copy assignment constructor for this to work
     }
 
 private:
