@@ -3,8 +3,6 @@
 
 int main()
 {
-
-
     MonopolyGame monopolyGame;
     monopolyGame.addPlayer("Kuba");
     monopolyGame.addPlayer("Olaf");

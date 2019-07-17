@@ -17,27 +17,21 @@
 class Board {
 
 public:
-    Board(int _numberOfFields) : numberOfFields(40){        std::cout<<"DDDDDDDDDD";
-    fieldVector.reserve(40);
+    Board(int _numberOfFields) : numberOfFields(40){
+        fieldVector.reserve(numberOfFields);
         StartField* tmp = new StartField();
-        fieldVector.push_back(tmp);
+        fieldVector.push_back(std::make_shared<Field*>());
         for (auto i = 0 ; i <= _numberOfFields; ++i)
         {
-            std::cout<<"XXXXXXXXXXXXXXXX";
-
-            AwardField* dd = new AwardField();
-
-//            if(i%3)
-//            fieldVector.push_back(PenaltyField());
-//            else
-            fieldVector.push_back(dd);
-
-
+            if(i%3)
+            fieldVector.push_back(std::make_shared<Field*>());
+            else
+            fieldVector.push_back(std::make_shared<Field*>());
         }
     }
     void addPlayer(std::string name)
     {
-        FieldIterator fieldIterator(fieldVector.begin());
+        FieldIterator fieldIterator(fieldVector);
         Player _player(name, 1000, fieldIterator);
         players.push_back(_player);
     }
@@ -54,11 +48,8 @@ private:
         std::cout<<player.getName() << " current position: "<< player.getPossition();
         std::cout<<" Current balance: "<<player.getMoney()<<std::endl;
     }
-    std::vector<Field*> fieldVector;
+    std::vector< std::shared_ptr<Field*> > fieldVector;
     std::vector<Player> players;
     int numberOfFields;
-
 };
-
-
 #endif //GTESTTEMPLATE_BOARD_H

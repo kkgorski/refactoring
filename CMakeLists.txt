@@ -1,5 +1,5 @@
 # Wersja CMake - zostawić jak jest
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.5)
 
 # Nazwa projektu
 project(GtestTemplate)

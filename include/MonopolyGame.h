@@ -19,16 +19,15 @@ private:
     Board board;
 };
 
-
 void MonopolyGame::addPlayer(std::string name) {
     board.addPlayer(name);
 }
 
 void MonopolyGame::runGame(int turns) {
     while(turns--){
-//        std::cout<<"turn" << turns;
+        std::cout<<"turn" << turns;
 
-        board.playRound();
+//        board.playRound();
     }
 }
 #endif //GTESTTEMPLATE_MONOPOLYGAME_H

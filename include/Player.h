@@ -26,11 +26,10 @@ public:
 //        money += field.getCurrent()->onEntry();
     }
     int getPossition(){return field.getCurrentFieldNumber();}
-    Field& getCurrentFieldValue()
+    Field* getCurrentFieldValue()
     {
-        return *field.getCurrent();
+        return *(field.getCurrent());
     }
-
 
 private:
     int rollDice() {return die.roll() + die.roll();}

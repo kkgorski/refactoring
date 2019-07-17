@@ -7,6 +7,8 @@
 
 #include <iostream>
 #include <vector>
+#include <memory>
+
 class Field {
 public:
     virtual int onEntry(){return 0;}
@@ -31,33 +33,29 @@ class AwardField: public Field{
     }
 };
 
-
-
-
-
 class FieldIterator{
 public:
 
-    FieldIterator(std::vector<Field*> fields){}
+    FieldIterator(std::vector< std::shared_ptr<Field*> > _fields): fields(_fields), current(fields.begin()){}
 
     FieldIterator& operator++(int)
     {
         ++current;
         ++counter;
-        std::cout<<"ASD "<< current->onEntry();
-        if(current == (*fields.end())) {
+//        std::cout<<"ASD "<< current->onEntry();
+        if(current == fields.end()) {
             counter = 0;
-            current = start;
+            current = fields.begin();
         }
     }
-    Field* getCurrent(){return current;}
+    std::shared_ptr<Field*> getCurrent(){return *current;}
     int getCurrentFieldNumber(){ return counter;}
 
 private:
-    std::vector<Field*> fields;
-    Field* current;
+    std::vector< std::shared_ptr<Field*> > fields;
+    std::vector< std::shared_ptr<Field*> >::iterator current;//fields;
+    //std::shared_ptr<Field*>current;
     int counter;
-
 };
 
 #endif //GTESTTEMPLATE_FIELD_H
