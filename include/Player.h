@@ -28,7 +28,7 @@ public:
         while (roll--)
         {
     //        money += currentField->onPass();
-            field++;
+            ++field;
         }
     //    money += currentField->onEntry();
     }

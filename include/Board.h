@@ -17,16 +17,22 @@ class StartField;
 
 class Board {
 public:
-    Board(int _numberOfFields) : numberOfFields(40){
+    Board(int _numberOfFields) : numberOfFields(40)
+    {
         fieldVector.reserve(numberOfFields);
         fieldVector.push_back(std::make_shared<StartField>());
-        for (auto i = 0 ; i <= _numberOfFields; ++i)
+        for (auto i = 1 ; i < _numberOfFields; ++i)
         {
             if(i%3)
-            fieldVector.push_back(std::make_shared<AwardField>());
+            {
+              fieldVector.push_back(std::make_shared<AwardField>());
+            }
             else
-            fieldVector.push_back(std::make_shared<PenaltyField>());
+            {
+              fieldVector.push_back(std::make_shared<PenaltyField>());
+            }
         }
+        std::cout<<"Fields size "<< fieldVector.size();
     }
     void addPlayer(std::string name)
     {
