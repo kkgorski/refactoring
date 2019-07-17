@@ -32,19 +32,22 @@ public:
               fieldVector.push_back(std::make_shared<PenaltyField>());
             }
         }
-        std::cout<<"Fields size "<< fieldVector.size();
+        std::cout<<"Fields size "<< fieldVector.size() << std::endl;
     }
+
     void addPlayer(std::string name)
     {
         FieldIterator fieldIterator(fieldVector);
         Player _player(name, 1000, fieldIterator);
         players.push_back(_player);
-        std::cout<<" Adding player "<< _player.getName() << " position " << _player.getPossition();
+        std::cout<<" Adding player "<< _player.getName() << " position " << _player.getPossition() << std::endl;
     }
 
     void playRound(){
+      std::cout << "before loop";
       for (auto& player: players)
       {
+        std::cout << "before make move";
         player.makeMove();
         std::cout<<player.getName() << " current position: "<< player.getPossition();
         std::cout<<" Current balance: "<<player.getMoney()<<std::endl;

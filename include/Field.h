@@ -43,7 +43,10 @@ class AwardField: public Field
 class FieldIterator{
 public:
 
-    FieldIterator(std::vector< std::shared_ptr<Field> > _fields): fields(_fields), current(fields.begin()), counter(0){}
+    FieldIterator(std::vector< std::shared_ptr<Field> >& _fields): fields(_fields), current(_fields.begin()), counter(0)
+    {
+        std::cout << "CONSTR iterator++: counter " << counter << " current " << (*current) << " fields.end() - 1 " << (*(fields.end() -1)) << " fields.begin() " << (*fields.begin()) << std::endl;
+    }
 
     FieldIterator& operator++()
     {

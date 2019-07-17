@@ -23,14 +23,18 @@ public:
     }
     void makeMove()
     {
+        std::cout << "before dice";
         int roll = rollDice();
-        //Field* currentField = *(field.getCurrent());
+        std::cout << "after dice";
+//        Field* currentField = *(field.getCurrent());
         while (roll--)
         {
-    //        money += currentField->onPass();
+            std::cout << "before on pass";
+            money += field.getCurrent()->onPass();
+            std::cout << "after on pass";
             ++field;
         }
-    //    money += currentField->onEntry();
+        money += field.getCurrent()->onEntry();
     }
     int getPossition()
     {
