@@ -11,7 +11,12 @@
 class MonopolyGame
 {
 public:
-    MonopolyGame(int numberOfFields): board(numberOfFields) {}
+    MonopolyGame(int numberOfFields): board(numberOfFields)
+    {
+      std::shared_ptr<DieInterface> die1 = std::make_shared<DieK6>();
+      std::shared_ptr<DieInterface> die2 = std::make_shared<DieK10>();
+      dieBucket = std::make_shared<DieBucket>(die1, die2);
+    }
     void runGame(int turns = 100)
     {
       while(turns--){
@@ -28,7 +33,7 @@ public:
     void addPlayer(std::string name)
     {
         FieldIterator fieldIterator(board.getFieldVector());
-        players.push_back(std::make_shared<Player>(name, 1000, 6 /*dieType*/ , fieldIterator));
+        players.push_back(std::make_shared<Player>(name, 1000, fieldIterator,dieBucket));
         std::cout<<" Adding player "<< players.back()->getName() << " position " << players.back()->getPossition() << std::endl;
     }
 private:
@@ -59,6 +64,7 @@ private:
     }
 
     std::vector< std::shared_ptr<Player> > players;
+    std::shared_ptr<DieBucket> dieBucket;
     Board board;
 };
 
