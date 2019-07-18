@@ -28,7 +28,7 @@ class PenaltyField: public Field
 {
   public:
     virtual int onEntry() override {
-        return -2000;
+        return -200;
     }
 };
 
@@ -38,6 +38,22 @@ class AwardField: public Field
     virtual int onEntry() override {
         return 150;
     }
+};
+
+class DepositField: public Field
+{
+  public:
+    virtual int onEntry() override {
+        int value = deposit;
+        deposit = 0;
+        return value;
+    }
+    virtual int onPass() override {
+        deposit =+150;
+        return -150;
+    }
+private:
+    int deposit = 0;
 };
 
 class FieldIterator{

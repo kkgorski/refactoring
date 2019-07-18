@@ -25,6 +25,7 @@ void MonopolyGame::addPlayer(std::string name) {
 
 void MonopolyGame::runGame(int turns) {
     while(turns--){
+        std::cout <<"turn "<< turns;
         try{
         board.playRound();
         }

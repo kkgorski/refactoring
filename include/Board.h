@@ -22,7 +22,7 @@ public:
     {
         fieldVector.reserve(numberOfFields);
         fieldVector.push_back(std::make_shared<StartField>());
-        for (auto i = 1 ; i < _numberOfFields; ++i)
+        for (auto i = 1 ; i < _numberOfFields - 1; ++i)
         {
             if(i%3)
             {
@@ -33,6 +33,7 @@ public:
               fieldVector.push_back(std::make_shared<PenaltyField>());
             }
         }
+        fieldVector.push_back(std::make_shared<DepositField>());
         std::cout<<"Fields size "<< fieldVector.size() << std::endl;
     }
 
