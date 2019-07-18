@@ -27,9 +27,11 @@ public:
         int roll = rollDice();
         while (roll--)
         {
-            money += field.getCurrent()->onPass();
             ++field;
+            if (field.getCurrentFieldNumber() == 0)
+                money += field.getCurrent()->onPass();
         }
+
         money += field.getCurrent()->onEntry();
     }
     int getPossition()
@@ -39,7 +41,7 @@ public:
  
     bool isBankrupt()
     {
-      return money < 0;
+      return money <= 0;
     }
 private:
     int rollDice()

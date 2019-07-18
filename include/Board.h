@@ -18,7 +18,7 @@ class StartField;
 
 class Board {
 public:
-    Board(int _numberOfFields) : numberOfFields(40)
+    Board(int _numberOfFields) : numberOfFields(_numberOfFields)
     {
         fieldVector.reserve(numberOfFields);
         fieldVector.push_back(std::make_shared<StartField>());
