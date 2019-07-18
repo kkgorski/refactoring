@@ -18,7 +18,7 @@ class StartField;
 
 class Board {
 public:
-    Board(int _numberOfFields, int _dieType) : numberOfFields(_numberOfFields), dieType(_dieType)
+    Board(int _numberOfFields) : numberOfFields(_numberOfFields)
     {
         fieldVector.reserve(numberOfFields);
         fieldVector.push_back(std::make_shared<StartField>());
@@ -37,44 +37,13 @@ public:
         std::cout<<"Fields size "<< fieldVector.size() << std::endl;
     }
 
-    void addPlayer(std::string name)
+    std::vector< std::shared_ptr<Field> >& getFieldVector()
     {
-        FieldIterator fieldIterator(fieldVector);
-        players.push_back(std::make_shared<Player>(name, 1000, dieType, fieldIterator));
-        std::cout<<" Adding player "<< players.back()->getName() << " position " << players.back()->getPossition() << std::endl;
-    }
-
-    void removeLosers()
-    {
-      players.erase(std::remove_if(players.begin(), players.end(),
-             [](std::shared_ptr<Player> player) {return player->isBankrupt();}), players.end());
-    }
-
-    void terminateIfOnlyOnePlayerExists()
-    {
-      if (players.size() == 1)
-      {
-        std::cout << players.front()->getName() << " WON !!!!" << std::endl;
-        throw "game is over";
-      }
-    }
-
-    void playRound(){
-      for (auto& player: players)
-      {
-        player->makeMove();
-        std::cout<< player->getName() << "\t current position: "<< player->getPossition();
-        std::cout<<" Current balance: "<<player->getMoney()<<std::endl;
-      }
-      removeLosers();
-      terminateIfOnlyOnePlayerExists();
+      return fieldVector;
     }
 
 private:
-
     std::vector< std::shared_ptr<Field> > fieldVector;
-    std::vector< std::shared_ptr<Player> > players;
     int numberOfFields;
-    int dieType;
 };
 #endif //GTESTTEMPLATE_BOARD_H
