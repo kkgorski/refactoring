@@ -12,7 +12,7 @@
 class MonopolyGame
 {
 public:
-    MonopolyGame(int numberOfFields, std::shared_ptr<DieBucket> bucket): board(numberOfFields), dieBucket(bucker)
+    MonopolyGame(int numberOfFields, std::shared_ptr<DieBucket> bucket): board(numberOfFields), dieBucket(bucket)
     {    }
     void runGame(int turns = 100)
     {
