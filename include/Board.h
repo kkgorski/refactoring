@@ -14,8 +14,7 @@
 #include "Field.h"
 #include "Player.h"
 
-class StartField;
-
+using FieldPtr = std::shared_ptr<Field>;
 class Board {
 public:
     Board(int _numberOfFields) : numberOfFields(_numberOfFields)
@@ -37,13 +36,13 @@ public:
         std::cout<<"Fields size "<< fieldVector.size() << std::endl;
     }
 
-    std::vector< std::shared_ptr<Field> >& getFieldVector()
+    std::vector< FieldPtr >& getFieldVector()
     {
       return fieldVector;
     }
 
 private:
-    std::vector< std::shared_ptr<Field> > fieldVector;
+    std::vector< FieldPtr > fieldVector;
     int numberOfFields;
 };
 #endif //GTESTTEMPLATE_BOARD_H

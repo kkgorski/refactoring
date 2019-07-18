@@ -8,7 +8,7 @@
 #include "Board.h"
 #include "Die.h"
 
-
+using Players = std::shared_ptr<Player>;
 class MonopolyGame
 {
 public:
@@ -60,7 +60,7 @@ private:
       terminateIfOnlyOnePlayerExists();
     }
 
-    std::vector< std::shared_ptr<Player> > players;
+    std::vector< Players > players;
     std::shared_ptr<DieBucket> dieBucket;
     Board board;
 };
