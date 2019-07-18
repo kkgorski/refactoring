@@ -8,15 +8,12 @@
 #include "Board.h"
 #include "Die.h"
 
+
 class MonopolyGame
 {
 public:
-    MonopolyGame(int numberOfFields): board(numberOfFields)
-    {
-      std::shared_ptr<DieInterface> die1 = std::make_shared<DieK6>();
-      std::shared_ptr<DieInterface> die2 = std::make_shared<DieK10>();
-      dieBucket = std::make_shared<DieBucket>(die1, die2);
-    }
+    MonopolyGame(int numberOfFields, std::shared_ptr<DieBucket> bucket): board(numberOfFields), dieBucket(bucker)
+    {    }
     void runGame(int turns = 100)
     {
       while(turns--){
