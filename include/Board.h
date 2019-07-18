@@ -18,7 +18,7 @@ class StartField;
 
 class Board {
 public:
-    Board(int _numberOfFields) : numberOfFields(_numberOfFields)
+    Board(int _numberOfFields, int _dieType) : numberOfFields(_numberOfFields), dieType(_dieType)
     {
         fieldVector.reserve(numberOfFields);
         fieldVector.push_back(std::make_shared<StartField>());
@@ -39,7 +39,7 @@ public:
     void addPlayer(std::string name)
     {
         FieldIterator fieldIterator(fieldVector);
-        players.push_back(std::make_shared<Player>(name, 1000, fieldIterator));
+        players.push_back(std::make_shared<Player>(name, 1000, dieType, fieldIterator));
         std::cout<<" Adding player "<< players.back()->getName() << " position " << players.back()->getPossition() << std::endl;
     }
 
@@ -74,5 +74,6 @@ private:
     std::vector< std::shared_ptr<Field> > fieldVector;
     std::vector< std::shared_ptr<Player> > players;
     int numberOfFields;
+    int dieType;
 };
 #endif //GTESTTEMPLATE_BOARD_H

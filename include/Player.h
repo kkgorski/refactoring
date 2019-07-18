@@ -12,7 +12,7 @@ class Player
 {
 public:
 
-    Player(std::string _name, int _money, FieldIterator _field): name(_name), money(_money), field(_field){}
+    Player(std::string _name, int _money, int dieType, FieldIterator _field): name(_name), money(_money), die(dieType), field(_field){}
 
     const std::string getName() const
     {

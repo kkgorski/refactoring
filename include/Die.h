@@ -8,10 +8,13 @@
 
 class Die {
 public:
+    Die(int _type): type(_type){}
     int roll()
     {
-        return (rand() % 6) + 1;
+        return (rand() % type) + 1;
     }
+private:
+    int type;
 };
 
 
