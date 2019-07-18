@@ -18,8 +18,11 @@ class StartField;
 
 class Board {
 public:
-    Board(int _numberOfFields, int _dieType) : numberOfFields(_numberOfFields), dieType(_dieType)
+    Board(int _numberOfFields) : numberOfFields(_numberOfFields)
     {
+        std::shared_ptr<DieInterface> die1 = std::make_shared<DieK6>();
+        std::shared_ptr<DieInterface> die2 = std::make_shared<DieK10>();
+        dieBucket = std::make_shared<DieBucket>(die1, die2);
         fieldVector.reserve(numberOfFields);
         fieldVector.push_back(std::make_shared<StartField>());
         for (auto i = 1 ; i < _numberOfFields - 1; ++i)
@@ -40,7 +43,7 @@ public:
     void addPlayer(std::string name)
     {
         FieldIterator fieldIterator(fieldVector);
-        players.push_back(std::make_shared<Player>(name, 1000, dieType, fieldIterator));
+        players.push_back(std::make_shared<Player>(name, 1000, fieldIterator,dieBucket));
         std::cout<<" Adding player "<< players.back()->getName() << " position " << players.back()->getPossition() << std::endl;
     }
 
@@ -75,6 +78,6 @@ private:
     std::vector< std::shared_ptr<Field> > fieldVector;
     std::vector< std::shared_ptr<Player> > players;
     int numberOfFields;
-    int dieType;
+    std::shared_ptr<DieBucket> dieBucket;
 };
 #endif //GTESTTEMPLATE_BOARD_H

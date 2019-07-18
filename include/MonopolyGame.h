@@ -11,7 +11,7 @@
 class MonopolyGame
 {
 public:
-    MonopolyGame(int numberOfFields, int dieType = 6): board(numberOfFields, dieType) {}
+    MonopolyGame(int numberOfFields): board(numberOfFields) {}
     void runGame(int turns = 100);
     void addPlayer(std::string name);
 private:

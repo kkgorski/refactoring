@@ -28,7 +28,7 @@ class PenaltyField: public Field
 {
   public:
     virtual int onEntry() override {
-        return -200;
+        return -700;
     }
 };
 

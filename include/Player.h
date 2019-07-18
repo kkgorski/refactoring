@@ -12,7 +12,7 @@ class Player
 {
 public:
 
-    Player(std::string _name, int _money, int dieType, FieldIterator _field): name(_name), money(_money), die(dieType), field(_field){}
+    Player(std::string _name, int _money, FieldIterator _field, std::shared_ptr<DieBucket> bucket): name(_name), money(_money), field(_field), die(bucket) {}
 
     const std::string getName() const
     {
@@ -24,7 +24,7 @@ public:
     }
     void makeMove()
     {
-        int roll = rollDice();
+        int roll = die.get()->rollTwice();
         while (roll--)
         {
             ++field;
@@ -44,13 +44,9 @@ public:
       return money <= 0;
     }
 private:
-    int rollDice()
-    {
-      return die.roll() + die.roll();
-    }
     const std::string name;
     int money;
-    Die die;
+    std::shared_ptr<DieBucket> die;
     FieldIterator field;
 };
 #endif //GTESTTEMPLATE_PLAYER_H
