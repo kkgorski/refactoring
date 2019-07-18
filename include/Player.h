@@ -24,15 +24,10 @@ public:
     }
     void makeMove()
     {
-        std::cout << "before dice";
         int roll = rollDice();
-        std::cout << "after dice";
-//        Field* currentField = *(field.getCurrent());
         while (roll--)
         {
-            std::cout << "before on pass";
             money += field.getCurrent()->onPass();
-            std::cout << "after on pass";
             ++field;
         }
         money += field.getCurrent()->onEntry();
@@ -41,15 +36,10 @@ public:
     {
       return field.getCurrentFieldNumber();
     }
-    /*
-    Field* getCurrentFieldValue()
-    {
-        return field.getCurrent();
-    }
-*/
+ 
     bool isBankrupt()
     {
-      return money > 0;
+      return money < 0;
     }
 private:
     int rollDice()

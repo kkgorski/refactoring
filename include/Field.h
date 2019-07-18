@@ -43,17 +43,14 @@ class AwardField: public Field
 class FieldIterator{
 public:
 
-    FieldIterator(std::vector< std::shared_ptr<Field> >& _fields): fields(_fields), current(_fields.begin()), counter(0)
-    {
-        std::cout << "CONSTR iterator++: counter " << counter << " current " << (*current) << " fields.end() - 1 " << (*(fields.end() -1)) << " fields.begin() " << (*fields.begin()) << std::endl;
-    }
+    FieldIterator(std::vector< std::shared_ptr<Field> >& _fields): fields(_fields), current(_fields.begin()), counter(0){}
 
     FieldIterator& operator++()
     {
-        std::cout << "iterator++: counter " << counter << " current " << (*current) << " fields.end() - 1 " << (*(fields.end() -1)) << " fields.begin() " << (*fields.begin()) << std::endl;
+        //DON'T REMOVE, IMPORTANT DEBUG LOGS
+        //std::cout << "iterator++: counter " << counter << " current " << (*current) << " fields.end() - 1 " << (*(fields.end() -1)) << " fields.begin() " << (*fields.begin()) << std::endl;
         if(*(current) == *(fields.end()- 1))
         {
-          std::cout << "rolling" <<std::endl;
           counter = 0;
           current = fields.begin();
         }
@@ -64,6 +61,7 @@ public:
         }
         return *this;
     }
+
     std::shared_ptr<Field> getCurrent(){return *current;}
     int getCurrentFieldNumber(){ return counter;}
 

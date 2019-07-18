@@ -25,8 +25,14 @@ void MonopolyGame::addPlayer(std::string name) {
 
 void MonopolyGame::runGame(int turns) {
     while(turns--){
-        std::cout<<"turn " << turns << std::endl;
+      std::cout << "turn: " << turns << std::endl;
+        try{
         board.playRound();
+        }
+        catch (...)
+        {
+          break;
+        }
     }
 }
 #endif //GTESTTEMPLATE_MONOPOLYGAME_H

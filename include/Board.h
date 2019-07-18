@@ -39,28 +39,40 @@ public:
     void addPlayer(std::string name)
     {
         FieldIterator fieldIterator(fieldVector);
-        Player _player(name, 1000, fieldIterator);
-        players.push_back(_player);
-        std::cout<<" Adding player "<< _player.getName() << " position " << _player.getPossition() << std::endl;
+        players.push_back(std::make_shared<Player>(name, 1000, fieldIterator));
+        std::cout<<" Adding player "<< players.back()->getName() << " position " << players.back()->getPossition() << std::endl;
+    }
+
+    void removeLosers()
+    {
+      players.erase(std::remove_if(players.begin(), players.end(),
+             [](std::shared_ptr<Player> player) {return player->isBankrupt();}), players.end());
+    }
+
+    void terminateIfOnlyOnePlayerExists()
+    {
+      if (players.size() == 1)
+      {
+        std::cout << players.front()->getName() << " WON !!!!" << std::endl;
+        throw "game is over";
+      }
     }
 
     void playRound(){
-      std::cout << "before loop";
       for (auto& player: players)
       {
-        std::cout << "before make move";
-        std::cout<<player.getName() << " current position: "<< player.getPossition();
-        std::cout<<" Current balance: "<<player.getMoney()<<std::endl;
+        player->makeMove();
+        std::cout<< player->getName() << "\t current position: "<< player->getPossition();
+        std::cout<<" Current balance: "<<player->getMoney()<<std::endl;
       }
-      //players.erase(std::remove_if(players.begin(), players.end(), 
-      //      [](Player& player) {return player.isBankrupt();}), players.end());
-      //TODO implement copy assignment constructor for this to work
+      removeLosers();
+      terminateIfOnlyOnePlayerExists();
     }
 
 private:
 
     std::vector< std::shared_ptr<Field> > fieldVector;
-    std::vector<Player> players;
+    std::vector< std::shared_ptr<Player> > players;
     int numberOfFields;
 };
 #endif //GTESTTEMPLATE_BOARD_H
