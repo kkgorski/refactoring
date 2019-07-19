@@ -8,8 +8,6 @@
 #include "Die.h"
 #include "Field.h"
 
-class Guest;
-
 class Player
 {
 public:
@@ -31,10 +29,10 @@ public:
         {
             ++field;
             if (field.getCurrentFieldNumber() == 0)
-                money += field.getCurrent()->onPass(reinterpret_cast<Guest *>(this));
+                money += field.getCurrent()->onPass();
         }
 
-        money += field.getCurrent()->onEntry(reinterpret_cast<Guest *>(this));
+        money += field.getCurrent()->onEntry();
     }
     int getPossition()
     {
@@ -47,23 +45,8 @@ public:
     }
 private:
     const std::string name;
-protected:
     int money;
-private:
-    FieldIterator field;
     std::shared_ptr<DieBucket> die;
+    FieldIterator field;
 };
-
-class Guest : private Player
-{
-  void incrementMoney(int amount)
-  {
-    money += amount;
-  }
-  void decrementMoney(int amount)
-  {
-    money += amount;
-  }
-};
-
 #endif //GTESTTEMPLATE_PLAYER_H

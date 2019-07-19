@@ -9,19 +9,17 @@
 #include <vector>
 #include <memory>
 
-class Guest;
-
 class Field {
 public:
-    virtual int onEntry(Guest* guest) {return 0;}
-    virtual int onPass(Guest* guest) {return 0;}
+    virtual int onEntry() {return 0;}
+    virtual int onPass() {return 0;}
     virtual ~Field(){}
 };
 
 class StartField: public Field
 {
   public:
-    virtual int onPass(Guest* guest) override {
+    virtual int onPass() override {
         return 200;
     }
 };
@@ -29,7 +27,7 @@ class StartField: public Field
 class PenaltyField: public Field
 {
   public:
-    virtual int onEntry(Guest* guest) override {
+    virtual int onEntry() override {
         return -700;
     }
 };
@@ -37,7 +35,7 @@ class PenaltyField: public Field
 class AwardField: public Field
 {
   public:
-    virtual int onEntry(Guest* guest) override {
+    virtual int onEntry() override {
         return 150;
     }
 };
@@ -45,12 +43,12 @@ class AwardField: public Field
 class DepositField: public Field
 {
   public:
-    virtual int onEntry(Guest* guest) override {
+    virtual int onEntry() override {
         int value = deposit;
         deposit = 0;
         return value;
     }
-    virtual int onPass(Guest* guest) override {
+    virtual int onPass() override {
         deposit =+150;
         return -150;
     }
