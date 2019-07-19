@@ -49,7 +49,7 @@ public:
     {
       return money <= 0;
     }
-    virtual bool considerBuying(int price){}
+    virtual bool considerBuying(int price)=0;
 protected:
     const std::string name;
     int money;
@@ -60,17 +60,26 @@ protected:
 
 class RealPlayer : public Player
 {
+public:
+    RealPlayer(std::string _name, int _money, FieldIterator _field, std::shared_ptr<DieBucket> bucket): Player( _name, _money, _field,  bucket) {}
       virtual bool considerBuying(int price);
 };
 
 class GreedyAIPlayer : public Player
 {
-      bool considerBuying() { return 1;}
+public:
+    GreedyAIPlayer(std::string _name, int _money, FieldIterator _field, std::shared_ptr<DieBucket> bucket): Player( _name, _money, _field,  bucket) {}
+
+    virtual bool considerBuying(int price) { return 1;}
 };
 
 class RandomAIPlayer : public Player
 {
-      bool considerBuying() { return std::rand() % 2;}
+public:
+
+    RandomAIPlayer(std::string _name, int _money, FieldIterator _field, std::shared_ptr<DieBucket> bucket): Player( _name, _money, _field,  bucket) {}
+
+    virtual bool considerBuying(int price) { return std::rand() % 2;}
 };
 
 #endif //GTESTTEMPLATE_PLAYER_H
