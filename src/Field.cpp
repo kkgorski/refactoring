@@ -55,5 +55,8 @@ void PropertyField::updateOwner(Player* player){
   owner = player;
 }
 
+void PropertyField::resetPropertyIfOwnerIs(Player& player){
+  if(owner == &player)
+    owner = nullptr; 
+}
 
-#include "Field.h"
