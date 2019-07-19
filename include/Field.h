@@ -11,7 +11,7 @@
 
 class Field {
 public:
-    virtual int onEntry() {return 0;}
+    virtual void onEntry(Player& player) {}
     virtual int onPass() {return 0;}
     virtual ~Field(){}
 };
@@ -27,26 +27,26 @@ class StartField: public Field
 class PenaltyField: public Field
 {
   public:
-    virtual int onEntry() override {
-        return -700;
+    virtual void onEntry(Player& player) override {
+        player.updateMoney(-700);
     }
 };
 
 class AwardField: public Field
 {
   public:
-    virtual int onEntry() override {
-        return 150;
+    virtual void onEntry(Player& player) override {
+        player.updateMoney(200);
     }
 };
 
 class DepositField: public Field
 {
   public:
-    virtual int onEntry() override {
+    virtual void onEntry(Player& player) override {
         int value = deposit;
         deposit = 0;
-        return value;
+        player.updateMoney(value);
     }
     virtual int onPass() override {
         deposit =+150;
@@ -54,6 +54,41 @@ class DepositField: public Field
     }
 private:
     int deposit = 0;
+};
+
+class PropertyField: public Field {
+public:
+    PropertyField(int _rent, int _price): rent(_rent), price(_price), owner(nullptr){}
+
+    int getRent(){
+        return rent;
+    }
+
+    virtual void onEntry(Player* player) override {
+        if (hasOwner())
+            makePlayerPay(player);
+        else
+
+
+    }
+
+private:
+    bool hasOwner() const
+    {
+        return owner != nullptr;
+    }
+
+    void makePlayerPay(Player* player) {
+        player->updateMoney(-rent);
+        owner->updateMoney(rent);
+    }
+    void buyProperty(Player* player){
+        player->updateMoney(-price);
+        owner = player;
+    }
+    Player* owner;
+    int rent;
+    int price;
 };
 
 class FieldIterator{

@@ -22,6 +22,12 @@ public:
     {
       return money;
     }
+
+    void updateMoney(int value)
+    {
+        money =+ value;
+    }
+
     void makeMove()
     {
         int roll = die.get()->rollTwice();
@@ -29,10 +35,10 @@ public:
         {
             ++field;
             if (field.getCurrentFieldNumber() == 0)
-                money += field.getCurrent()->onPass();
+                updateMoney(field.getCurrent()->onPass());
         }
 
-        money += field.getCurrent()->onEntry();
+        field.getCurrent()->onEntry();
     }
     int getPossition()
     {
