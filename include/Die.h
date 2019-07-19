@@ -6,6 +6,7 @@
 #define GTESTTEMPLATE_DIE_H
 
 #include <memory>
+#include "vector"
 
 class DieInterface {
 public:
@@ -25,18 +26,32 @@ class DieK10: public DieInterface
         return (rand() % 10) + 1;
     }
 };
+class DieCosmic: public DieInterface
+{
+    virtual int roll(){
+        return ((rand() % 9) + 1)%8;
+    }
+};
 
 
 class DieBucket {
 public:
-    DieBucket(std::shared_ptr<DieInterface> _die1, std::shared_ptr<DieInterface> _die2):die1(_die1),die2(_die2){}
     int rollTwice(){
-        return die1.get()->roll() + die2.get()->roll();
+        int result = 0;
+        for( auto i: dies)
+            result += i.get()->roll();
+        return result;
+    }
+    DieBucket(std::vector<std::shared_ptr<DieInterface>> die) {
+        dies = die;
     }
 
 private:
-    std::shared_ptr<DieInterface> die1;
-    std::shared_ptr<DieInterface> die2;
+    std::vector<std::shared_ptr<DieInterface>> dies;
+
 };
+
+
+
 #endif //GTESTTEMPLATE_DIE_H
 
