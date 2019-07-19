@@ -50,12 +50,25 @@ private:
       }
     }
 
+    void resetPropertyOwnedBy(Players& player)
+    {
+      std::vector< FieldPtr > fieldVector = board.getFieldVector();
+      for (auto& field : fieldVector)
+      {
+        field->resetPropertyIfOwnerIs(*player);
+      }
+    }
+
     void playRound(){
       for (auto& player: players)
       {
         player->makeMove();
         std::cout<< player->getName() << "\t current position: "<< player->getPossition();
         std::cout<<" Current balance: "<<player->getMoney()<<std::endl;
+        if(player->isBankrupt())
+        {
+          resetPropertyOwnedBy(player);
+        }
       }
       removeLosers();
       terminateIfOnlyOnePlayerExists();

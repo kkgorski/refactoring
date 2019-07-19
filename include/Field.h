@@ -15,6 +15,7 @@ class Field {
 public:
     virtual void onEntry(Player* player) {}
     virtual void onPass(Player* player) {}
+    virtual void resetPropertyIfOwnerIs(Player& player) {}
     virtual ~Field(){}
 };
 
@@ -54,6 +55,7 @@ public:
     }
 
     virtual void onEntry(Player* player) override;
+    virtual void resetPropertyIfOwnerIs(Player& player) override;
 
 private:
     bool hasOwner() const
