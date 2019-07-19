@@ -9,51 +9,40 @@
 #include <vector>
 #include <memory>
 
+class Player;
+
 class Field {
 public:
-    virtual void onEntry(Player& player) {}
-    virtual int onPass() {return 0;}
+    virtual void onEntry(Player* player) {}
+    virtual void onPass(Player* player) {}
     virtual ~Field(){}
 };
 
 class StartField: public Field
 {
   public:
-    virtual int onPass() override {
-        return 200;
-    }
+    virtual void onPass(Player* player) override;
 };
 
 class PenaltyField: public Field
 {
   public:
-    virtual void onEntry(Player& player) override {
-        player.updateMoney(-700);
-    }
+    virtual void onEntry(Player* player) override;
 };
 
 class AwardField: public Field
 {
   public:
-    virtual void onEntry(Player& player) override {
-        player.updateMoney(200);
-    }
+    virtual void onEntry(Player* player) override;
 };
 
 class DepositField: public Field
 {
-  public:
-    virtual void onEntry(Player& player) override {
-        int value = deposit;
-        deposit = 0;
-        player.updateMoney(value);
-    }
-    virtual int onPass() override {
-        deposit =+150;
-        return -150;
-    }
+public:
+  virtual void onEntry(Player* player) override;
+  virtual void onPass(Player* player) override;
 private:
-    int deposit = 0;
+  int deposit = 0;
 };
 
 class PropertyField: public Field {
@@ -64,13 +53,7 @@ public:
         return rent;
     }
 
-    virtual void onEntry(Player* player) override {
-        if (hasOwner())
-            makePlayerPay(player);
-        else
-
-
-    }
+    virtual void onEntry(Player* player) override;
 
 private:
     bool hasOwner() const
@@ -78,14 +61,12 @@ private:
         return owner != nullptr;
     }
 
-    void makePlayerPay(Player* player) {
-        player->updateMoney(-rent);
-        owner->updateMoney(rent);
-    }
-    void buyProperty(Player* player){
-        player->updateMoney(-price);
-        owner = player;
-    }
+    void makePlayerPay(Player* player);
+
+    void buyProperty(Player* player);
+    void offerProperty(Player* player);
+    void updateOwner(Player* player);
+
     Player* owner;
     int rent;
     int price;

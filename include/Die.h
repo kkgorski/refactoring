@@ -5,7 +5,7 @@
 #ifndef GTESTTEMPLATE_DIE_H
 #define GTESTTEMPLATE_DIE_H
 
-
+#include <memory>
 
 class DieInterface {
 public:
@@ -15,7 +15,7 @@ public:
 class DieK6: public DieInterface
 {
     virtual int roll(){
-        return (rand() % 6) + 1;
+        return (std::rand() % 6) + 1;
     }
 };
 

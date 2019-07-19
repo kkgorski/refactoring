@@ -35,10 +35,10 @@ public:
         {
             ++field;
             if (field.getCurrentFieldNumber() == 0)
-                updateMoney(field.getCurrent()->onPass());
+                field.getCurrent()->onPass(this);
         }
 
-        field.getCurrent()->onEntry();
+        field.getCurrent()->onEntry(this);
     }
     int getPossition()
     {
@@ -49,10 +49,28 @@ public:
     {
       return money <= 0;
     }
-private:
+    virtual bool considerBuying(int price){}
+protected:
     const std::string name;
     int money;
     std::shared_ptr<DieBucket> die;
     FieldIterator field;
 };
+
+
+class RealPlayer : public Player
+{
+      virtual bool considerBuying(int price);
+};
+
+class GreedyAIPlayer : public Player
+{
+      bool considerBuying() { return 1;}
+};
+
+class RandomAIPlayer : public Player
+{
+      bool considerBuying() { return std::rand() % 2;}
+};
+
 #endif //GTESTTEMPLATE_PLAYER_H
