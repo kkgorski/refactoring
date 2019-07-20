@@ -31,14 +31,19 @@ public:
     void makeMove()
     {
         int roll = die.get()->rollTwice();
+
+        std::cout << name << " $[" << money << "] ";
+
         while (roll--)
         {
             ++field;
-            if (field.getCurrentFieldNumber() == 0)
-                field.getCurrent()->onPass(this);
+            field.getCurrent()->onPass(this);
         }
-
         field.getCurrent()->onEntry(this);
+
+        std::cout << " $[" << money << "]";
+
+        std::cout << std::endl;
     }
     int getPossition()
     {

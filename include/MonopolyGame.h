@@ -17,7 +17,7 @@ public:
     void runGame(int turns = 100)
     {
       while(turns--){
-        std::cout <<"turn "<< turns << std::endl;
+        std::cout <<"TURN "<< turns << std::endl << std::endl;
         try{
         playRound();
         }
@@ -53,18 +53,23 @@ private:
     void resetPropertyOwnedBy(Players& player)
     {
       std::vector< FieldPtr > fieldVector = board.getFieldVector();
+      int counter = 0;
+      std::string propertyOwners ="";
       for (auto& field : fieldVector)
       {
+        propertyOwners += counter;
+        propertyOwners += " : ";
+        propertyOwners += field->getOwnerName();
+        propertyOwners += " ";
         field->resetPropertyIfOwnerIs(*player);
       }
+      std::cout << propertyOwners << std::endl;
     }
 
     void playRound(){
       for (auto& player: players)
       {
         player->makeMove();
-        std::cout<< player->getName() << "\t current position: "<< player->getPossition();
-        std::cout<<" Current balance: "<<player->getMoney()<<std::endl;
         if(player->isBankrupt())
         {
           resetPropertyOwnedBy(player);

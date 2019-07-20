@@ -6,29 +6,35 @@
 #include <Player.h>
 
 void StartField::onPass(Player* player){
-  std::cout << player->getName() << " passing start field: +200" << std::endl;
+  std::cout <<" pass  start:   +200" ;
   player->updateMoney(200);
 }
 
 void PenaltyField::onEntry(Player* player){
-  std::cout << player->getName() << " entering penalty field: -200" << std::endl;
-  player->updateMoney(-1000);
+  std::cout << " ent  penalty: -500" ;
+  player->updateMoney(-500);
 }
 
 void AwardField::onEntry(Player* player){
-  std::cout << player->getName() << " entering award field: +200" << std::endl;
+  std::cout << " ent  award:   +200" ;
   player->updateMoney(200);
 }
 
 void DepositField::onEntry(Player* player){
-  std::cout << player->getName() << " entering deposit field: +" << deposit << std::endl;
+  std::cout << " ent  deposit: +" << deposit ;
   player->updateMoney(deposit);
   deposit = 0;
 }
 
 void DepositField::onPass(Player* player){
-  std::cout << player->getName() << " passsing deposit field: -150" << std::endl;
+  std::cout << " pass deposit: -150";
   player->updateMoney(-150);
+  deposit += 150;
+}
+
+std::string PropertyField::getOwnerName()
+{
+  return owner->getName();
 }
 
 void PropertyField::onEntry(Player* player){

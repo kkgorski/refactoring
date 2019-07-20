@@ -16,6 +16,7 @@ public:
     virtual void onEntry(Player* player) {}
     virtual void onPass(Player* player) {}
     virtual void resetPropertyIfOwnerIs(Player& player) {}
+    virtual std::string getOwnerName() {return "None";}
     virtual ~Field(){}
 };
 
@@ -56,6 +57,7 @@ public:
 
     virtual void onEntry(Player* player) override;
     virtual void resetPropertyIfOwnerIs(Player& player) override;
+    virtual std::string getOwnerName() override;
 
 private:
     bool hasOwner() const

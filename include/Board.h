@@ -21,18 +21,16 @@ public:
     {
         fieldVector.reserve(numberOfFields);
         fieldVector.push_back(std::make_shared<StartField>());
-        for (auto i = 1 ; i < _numberOfFields - 1; ++i)
-        {
-            if(i%3)
-            {
-              fieldVector.push_back(std::make_shared<AwardField>());
-            }
-            else
-            {
-              fieldVector.push_back(std::make_shared<PenaltyField>());
-            }
-        }
+        //assuming no Fields 10 for debugging purposes
         fieldVector.push_back(std::make_shared<DepositField>());
+        fieldVector.push_back(std::make_shared<PropertyField>(50,100));
+        fieldVector.push_back(std::make_shared<AwardField>());
+        fieldVector.push_back(std::make_shared<PropertyField>(500,100));
+        fieldVector.push_back(std::make_shared<AwardField>());
+        fieldVector.push_back(std::make_shared<DepositField>());
+        fieldVector.push_back(std::make_shared<PenaltyField>());
+        fieldVector.push_back(std::make_shared<DepositField>());
+        fieldVector.push_back(std::make_shared<PenaltyField>());
         std::cout<<"Fields size "<< fieldVector.size() << std::endl;
     }
 
