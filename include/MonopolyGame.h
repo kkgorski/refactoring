@@ -32,7 +32,7 @@ public:
     {
         FieldIterator fieldIterator(board.getFieldVector());
         players.push_back(std::make_shared<T>(name, 1000, fieldIterator,dieBucket));
-        std::cout<<" Adding player "<< players.back()->getName() << " position " << players.back()->getPossition() << std::endl;
+        std::cout<<" Adding player "<< players.back()->getName() << " position " << players.back()->getPossition() << " money " << players.back()->getMoney() << std::endl;
     }
 private:
     void removeLosers()

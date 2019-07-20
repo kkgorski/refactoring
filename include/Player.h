@@ -25,7 +25,7 @@ public:
 
     void updateMoney(int value)
     {
-        money =+ value;
+        money += value;
     }
 
     void makeMove()
@@ -44,7 +44,7 @@ public:
     {
       return field.getCurrentFieldNumber();
     }
- 
+
     bool isBankrupt()
     {
       return money <= 0;
