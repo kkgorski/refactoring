@@ -34,7 +34,11 @@ void DepositField::onPass(Player* player){
 
 std::string PropertyField::getOwnerName()
 {
-  return owner->getName();
+  if(nullptr != owner)
+  {
+    return owner->getName();
+  }
+  return "None";
 }
 
 void PropertyField::onEntry(Player* player){
@@ -45,29 +49,24 @@ else
 }
 
 void PropertyField::makePlayerPay(Player* player) {
+  std::cout << " ent property: -" << rent;
   player->updateMoney(-rent);
   owner->updateMoney(rent);
-}
-
-void PropertyField::buyProperty(Player* player){
-  player->updateMoney(-price);
-  owner = player;
 }
 
 void PropertyField::offerProperty(Player* player){
   if(player->getMoney() >= price && player->considerBuying(price))
   {
+    std::cout << " buy property: -" << price;
     player->updateMoney(-price);
-    updateOwner(player);
+    owner = player;
   }
-}
-
-void PropertyField::updateOwner(Player* player){
-  owner = player;
 }
 
 void PropertyField::resetPropertyIfOwnerIs(Player& player){
   if(owner == &player)
+  {
     owner = nullptr;
+  }
 }
 

@@ -53,15 +53,25 @@ private:
     void resetPropertyOwnedBy(Players& player)
     {
       std::vector< FieldPtr > fieldVector = board.getFieldVector();
+      std::cout << "Resetting properties owned by: " << player->getName() << std::endl;
+      for (auto& field : fieldVector)
+      {
+        field->resetPropertyIfOwnerIs(*player);
+      }
+    }
+
+    void printProperties()
+    {
+      std::vector< FieldPtr > fieldVector = board.getFieldVector();
       int counter = 0;
       std::string propertyOwners ="";
       for (auto& field : fieldVector)
       {
-        propertyOwners += counter;
-        propertyOwners += " : ";
+        propertyOwners += std::to_string(counter); //TODO should be field name
+        propertyOwners += "[";
         propertyOwners += field->getOwnerName();
-        propertyOwners += " ";
-        field->resetPropertyIfOwnerIs(*player);
+        propertyOwners += "] ";
+        counter++;
       }
       std::cout << propertyOwners << std::endl;
     }
@@ -75,6 +85,8 @@ private:
           resetPropertyOwnedBy(player);
         }
       }
+
+      printProperties();
       removeLosers();
       terminateIfOnlyOnePlayerExists();
     }

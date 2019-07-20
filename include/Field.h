@@ -66,9 +66,7 @@ private:
     }
 
     void makePlayerPay(Player* player);
-    void buyProperty(Player* player);
     void offerProperty(Player* player);
-    void updateOwner(Player* player);
 
     Player* owner;
     int rent;

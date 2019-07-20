@@ -32,7 +32,7 @@ public:
     {
         int roll = die.get()->rollTwice();
 
-        std::cout << name << " $[" << money << "] ";
+        std::cout << name << " roll[" << roll << "] $[" << money << "] ";
 
         while (roll--)
         {
