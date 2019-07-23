@@ -12,27 +12,39 @@ using Players = std::shared_ptr<Player>;
 class MonopolyGame
 {
 public:
-    MonopolyGame(int numberOfFields, std::shared_ptr<DieBucket> bucket): board(numberOfFields), dieBucket(bucket)
-    {    }
-    void runGame(int turns = 100)
+    MonopolyGame(){}
+    MonopolyGame* buildBoard(int numberOfFields)
     {
-      while(turns--){
+      board = Board(numberOfFields);
+      return this;
+    }
+    MonopolyGame* addDieBucket(std::shared_ptr<DieBucket> bucket)
+    {
+      dieBucket = bucket;
+      return this;
+    }
+    template <typename T>
+    MonopolyGame* addPlayer(std::string name)
+    {
+        FieldIterator fieldIterator(board.getFieldVector());
+        players.push_back(std::make_shared<T>(name, 1000, fieldIterator,dieBucket));
+        std::cout<<" Adding player "<< players.back()->getName() << " position " << players.back()->getPossition() << " money " << players.back()->getMoney() << std::endl;
+        return this;
+    }
+    void run(int turns = 100)
+    {
+      while(turns--)
+      {
         std::cout <<"TURN "<< turns << std::endl << std::endl;
-        try{
+        try
+        {
         playRound();
         }
         catch (...)
         {
           break;
         }
-    }
-    }
-    template <typename T>
-    void addPlayer(std::string name)
-    {
-        FieldIterator fieldIterator(board.getFieldVector());
-        players.push_back(std::make_shared<T>(name, 1000, fieldIterator,dieBucket));
-        std::cout<<" Adding player "<< players.back()->getName() << " position " << players.back()->getPossition() << " money " << players.back()->getMoney() << std::endl;
+      }
     }
 private:
     void removeLosers()

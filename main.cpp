@@ -13,12 +13,12 @@ int main()
     dies.push_back(die2);
     std::shared_ptr<DieBucket> dieBucket = std::make_shared<DieBucket>(dies);
 
-    MonopolyGame monopolyGame(10, dieBucket);
-   // monopolyGame.addPlayer<RealPlayer>("Olaf");
-    monopolyGame.addPlayer<GreedyAIPlayer>("Stee");
-   // monopolyGame.addPlayer<GreedyAIPlayer>("Gome");
-    monopolyGame.addPlayer<RandomAIPlayer>("xdxd");
-    monopolyGame.addPlayer<RealPlayer>("Kuba");
-    monopolyGame.runGame();
+    std::unique_ptr<MonopolyGame> game = std::make_unique<MonopolyGame>();
+    game->buildBoard(10)
+        ->addDieBucket(dieBucket)
+        ->addPlayer<RealPlayer>("Olaf")
+        ->addPlayer<GreedyAIPlayer>("Stee")
+        ->addPlayer<RandomAIPlayer>("xdxd");
+    game->run();
     return 0;
 }

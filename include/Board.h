@@ -17,7 +17,7 @@
 using FieldPtr = std::shared_ptr<Field>;
 class Board {
 public:
-    Board(int _numberOfFields) : numberOfFields(_numberOfFields)
+    Board(int _numberOfFields = 0) : numberOfFields(_numberOfFields)
     {
         fieldVector.reserve(numberOfFields);
         fieldVector.push_back(std::make_shared<StartField>());
