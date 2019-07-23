@@ -14,7 +14,7 @@ include_directories(include                     #nasz folder include
 
 # Tu będą wszystkie pliki .cpp projektu (na razie nie mamy żadnych)
 set(SOURCE_FILES
-        include/Die.h src/Player.cpp include/Player.h src/Board.cpp include/Board.h src/Field.cpp include/Field.h include/MonopolyGame.h)
+        include/Die.h src/Player.cpp include/Player.h src/Board.cpp include/Board.h src/Field.cpp include/Field.h include/MonopolyGame.h src/MonopolyGame.cpp)
 
 # Tu będą pliki .cpp używane tylko podczas testów jednostkowych
 set(TEST_SOURCES
